@@ -17,7 +17,7 @@ class Sale extends Model
 
     public function products()
     {
-    	return $this->belognsToMany('App\Product');
+    	return $this->belongsToMany('App\Product');
     }
 
 }

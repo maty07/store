@@ -22,7 +22,7 @@ class CreateProductSaleTable extends Migration
             $table->integer('sale_id')->unsigned();
             $table->foreign('sale_id')->references('id')->on('sales');
 
-            $table->integer('quantity');
+            $table->integer('quantity')->nullable();
 
             $table->timestamps();
         });
