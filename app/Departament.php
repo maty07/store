@@ -8,7 +8,7 @@ class Departament extends Model
 {
     
     protected $fillable = [
-    	'name', 'slug'
+    	'name', 'slug', 'active'
     ];
 
     public function categories()

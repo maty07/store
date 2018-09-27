@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $fillable = [
-    	'name', 'slug', 'description', 'image', 'price', 'quantity', 'category_id', 'genre_id'
+    	'name', 'slug', 'description', 'image', 'price', 'quantity', 'active', 'category_id', 'genre_id'
     ];
 
     public function genre()
@@ -22,6 +22,6 @@ class Product extends Model
 
     public function sales()
     {
-    	return $this->belongsToMany('App\Sale');
+    	return $this->belongsToMany('App\Sale')->withTimestamps();
     }
 }

@@ -18,6 +18,7 @@ class CreateGenresTable extends Migration
 
             $table->string('name', 50);
             $table->string('slug', 50);
+            $table->char('active', 1);
 
             $table->timestamps();
         });

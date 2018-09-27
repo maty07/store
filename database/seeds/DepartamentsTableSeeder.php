@@ -11,6 +11,6 @@ class DepartamentsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Departament::class, 8)->create();
+        factory(App\Departament::class, 11)->create();
     }
 }

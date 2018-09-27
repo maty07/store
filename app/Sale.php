@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Sale extends Model
 {
     protected $fillable = [
-    	'user_id', 'total'
+    	'user_id', 'total', 'active'
     ];
 
     public function user()
@@ -17,7 +17,7 @@ class Sale extends Model
 
     public function products()
     {
-    	return $this->belongsToMany('App\Product');
+    	return $this->belongsToMany('App\Product')->withTimestamps();
     }
 
 }

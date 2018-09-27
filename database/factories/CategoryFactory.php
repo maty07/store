@@ -7,6 +7,8 @@ $factory->define(App\Category::class, function (Faker $faker) {
     return [
         'name' => $name,
         'slug' => str_slug($name),
-        'departament_id' => rand(1, 8)
+        'image' => $faker->imageUrl(),
+        'active' => 1,
+        'departament_id' => rand(1, 11)
     ];
 });

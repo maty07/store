@@ -8,7 +8,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>
+        Tienda Online - @yield('title')
+    </title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -19,13 +21,25 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+    <style>
+        .img-carousel {
+          display: block;
+          width: 100%;
+          height: 400px;
+          background-position: center;
+          background-repeat: non-repeat;
+          background-size: cover;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    Tienda Online
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -40,6 +54,9 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('cart') }}">Carrito</a>
+                        </li>
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -48,9 +65,27 @@
                                 <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                             </li>
                         @else
+                        
+                        @if(auth()->user()->role == 'Admin')
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('departamento.index') }}">Departamentos</a>
+                            </li>
+                             <li class="nav-item">
+                                <a class="nav-link" href="{{ route('categoria.index') }}">Categorias</a>
+                            </li>
+                             <li class="nav-item">
+                                <a class="nav-link" href="{{ route('producto.index') }}">Productos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('carrusel.index') }}">Carrusel</a>
+                            </li>
+                        @endif
+                            <li class="nav-item">
+                                 <a class="nav-link" href="{{ route('cart') }}"></a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{ Auth::user()->first_name }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -66,14 +101,38 @@
                                 </div>
                             </li>
                         @endguest
+
                     </ul>
                 </div>
             </div>
         </nav>
 
-        <main class="py-4">
+
+
+        <main class="pb-4">
+            
+            @if(count($errors))
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 offset-md-2">
+                            <div class="alert alert-danger">
+                                 <ul>
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach   
+                                </ul> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
             @yield('content')
         </main>
     </div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="{{ asset('js/main.js') }}"></script>
 </body>
 </html>

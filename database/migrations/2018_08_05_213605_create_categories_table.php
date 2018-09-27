@@ -16,8 +16,10 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('name', 50);
+            $table->string('name', 50)->unique();
             $table->string('slug', 50);
+            $table->string('image');
+            $table->char('active', 1);
             $table->integer('departament_id')->unsigned();
             $table->foreign('departament_id')->references('id')->on('departaments')
                 ->onUpdate('cascade');
